@@ -11,7 +11,19 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'><link rel="stylesheet" href="./style.css">
 
   </head>
-    
+  
+<style>
+  /* 當欄位為必填且還沒填寫時的樣式 */
+input:required {
+    border-left: 5px solid #ff4d4d; /* 在左側加一條紅線提示 */
+}
+
+/* 當內容無效或沒填時顯示紅色邊框（送出時會觸發） */
+input:invalid {
+    border-color: #ff4d4d;
+}
+</style>
+  
   <body>
   <div class="container">
 
