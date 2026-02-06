@@ -104,23 +104,23 @@
 
   <div class="col-md-9">
     <div style="display: flex; align-items: flex-start; gap: 8px;">
-      <input type="radio" id="item1_5" name="item1" value="item1_5" style="margin-left: 30px;margin-top: 5px;">
+      <input type="radio" id="item1_5" name="item1" value="5" style="margin-left: 30px;margin-top: 5px;">
       <label for="item1_5" style="font-weight: normal; cursor: pointer; line-height: 1.4;">
         5 非常滿意<br>[Extremely Satisfied]
       </label>
-      <input type="radio" id="item1_4" name="item1" value="item1_4" style="margin-left: 30px;margin-top: 5px;">
+      <input type="radio" id="item1_4" name="item1" value="4" style="margin-left: 30px;margin-top: 5px;">
       <label for="item1_4" style="font-weight: normal; cursor: pointer; line-height: 1.4;">
         4 滿意<br>[Very Satisfied]
       </label>  
-      <input type="radio" id="item1_3" name="item1" value="item1_3" style="margin-left: 30px;margin-top: 5px;">
+      <input type="radio" id="item1_3" name="item1" value="3" style="margin-left: 30px;margin-top: 5px;">
       <label for="item1_3" style="font-weight: normal; cursor: pointer; line-height: 1.4;">
         3 普通<br>[Satisfied]
       </label>   
-      <input type="radio" id="item1_2" name="item1" value="item1_2" style="margin-left: 30px;margin-top: 5px;">
+      <input type="radio" id="item1_2" name="item1" value="2" style="margin-left: 30px;margin-top: 5px;">
       <label for="item1_2" style="font-weight: normal; cursor: pointer; line-height: 1.4;">
         2 不滿意<br>[Fair]
       </label>
-      <input type="radio" id="item1_1" name="item1" value="item1_1" style="margin-left: 30px;margin-top: 5px;">
+      <input type="radio" id="item1_1" name="item1" value="1" style="margin-left: 30px;margin-top: 5px;">
       <label for="item1_1" style="font-weight: normal; cursor: pointer; line-height: 1.4;">
         1 非常不滿意<br>[Dissatisfied]
       </label>      
@@ -162,7 +162,7 @@
           crossDomain: true,//解決跨網域CORS的問題
           data: {// entry.xxxxx 這些需要填寫您表單裡面的值，與其相互對應
             "entry.1888997779": $('#company_name').val(),
-            "entry.1274021626": $('item1').val()
+            "entry.1274021626": $('input[name="item1"]:checked').val()
           },
           type: "POST", //因為是要進行insert的動作，故事用POST
           dataType: "JSONP",
