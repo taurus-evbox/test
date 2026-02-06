@@ -23,17 +23,14 @@
           crossDomain: true,//解決跨網域CORS的問題
           data: {// entry.xxxxx 這些需要填寫您表單裡面的值，與其相互對應
             "entry.1888997779": $('#company_name').val(),
-            "entry.1781783572_sentinel": $('#email').val(),
-            "entry.158099402_sentinel": $('#score').val()
+            "entry.690732583": $('#item1').val()
           },
           type: "POST", //因為是要進行insert的動作，故事用POST
           dataType: "JSONP",
           complete: function () {
             //完成後把這些欄位清空
-            $('#name').val('')
-            $('#email').val('')
-            $('#score').val('')
-            $('#message').val('')
+            $('#company_name').val('')
+            $('#item1').val('')
             //最後跳轉到感謝的頁面
             window.location.replace("thank.html");
           }
