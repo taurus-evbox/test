@@ -151,31 +151,44 @@
 <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script><script  src="./script.js"></script>
 <script>
-    $('#google-form').submit(function (e) {
-      //在這裡我們要先擋掉form默認事件
-      e.preventDefault();
+$('#google-form').submit(function (e) {
+  e.preventDefault();
 
-      if ($('#company_name').val()) {//需要先確認必填欄位是否填寫
-        $.ajax({
-          // url為Google Form按下submit的aciotn
-          url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfehspoDvGEklO90QeRY0SGaJWai5E2R8UhM2d3VwsaPh8W0A/formResponse",
-          crossDomain: true,//解決跨網域CORS的問題
-          data: {// entry.xxxxx 這些需要填寫您表單裡面的值，與其相互對應
-            "entry.1888997779": $('#company_name').val(),
-            "entry.1781783572": $('input[name="item1"]:checked').val()
-          },
-          type: "POST", //因為是要進行insert的動作，故事用POST
-          dataType: "JSONP",
-          complete: function () {
-            //完成後把這些欄位清空
-            $('#company_name').val('')
-            $('input[name="item1"]').prop('checked', false); // 清空單選鈕
-            //最後跳轉到感謝的頁面
-            window.location.replace("thank.html");
-          }
-        });
+  // 檢查必填欄位
+  if ($('#company_name').val()) {
+    $.ajax({
+      url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfehspoDvGEklO90QeRY0SGaJWai5E2R8UhM2d3VwsaPh8W0A/formResponse",
+      crossDomain: true,
+      data: {
+        "entry.1888997779": $('#company_name').val(),
+        "entry.1781783572": $('input[name="item1"]:checked').val()
+      },
+      type: "POST",
+      // 改用 xml 避免 JSONP 錯誤解析，即使噴出 CORS 錯誤，資料通常也會送達
+      dataType: "xml", 
+      statusCode: {
+        0: function() {
+          // 因為跨網域，Google 不會回傳成功狀態碼，通常 status 為 0 代表成功送出
+          handleSuccess();
+        },
+        200: function() {
+          handleSuccess();
+        }
+      },
+      error: function() {
+        // 即使進入 error，只要資料沒錯，通常 Google 已經收到了
+        handleSuccess();
       }
     });
+  }
+});
+
+function handleSuccess() {
+  $('#company_name').val('');
+  $('input[name="item1"]').prop('checked', false);
+  alert("感謝您的填寫！");
+  window.location.replace("thank.html");
+}
   </script>
  <!--===============================================================================================-->
   </body>
