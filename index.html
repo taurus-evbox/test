@@ -9,9 +9,38 @@
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'><link rel="stylesheet" href="./style.css">
-
-  
   </head>
+
+<script>
+    $('#google-form').submit(function (e) {
+      //在這裡我們要先擋掉form默認事件
+      e.preventDefault();
+
+      if ($('#company_name').val()) {//需要先確認必填欄位是否填寫
+        $.ajax({
+          // url為Google Form按下submit的aciotn
+          url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfehspoDvGEklO90QeRY0SGaJWai5E2R8UhM2d3VwsaPh8W0A/formResponse",
+          crossDomain: true,//解決跨網域CORS的問題
+          data: {// entry.xxxxx 這些需要填寫您表單裡面的值，與其相互對應
+            "entry.1888997779": $('#company_name').val(),
+            "entry.1781783572_sentinel": $('#email').val(),
+            "entry.158099402_sentinel": $('#score').val()
+          },
+          type: "POST", //因為是要進行insert的動作，故事用POST
+          dataType: "JSONP",
+          complete: function () {
+            //完成後把這些欄位清空
+            $('#name').val('')
+            $('#email').val('')
+            $('#score').val('')
+            $('#message').val('')
+            //最後跳轉到感謝的頁面
+            window.location.replace("thank.html");
+          }
+        });
+      }
+    });
+  </script>
   
   <body>
   <div class="container">
@@ -96,7 +125,17 @@
     </div>
   </div>
 </div>
- 
+
+<p><b>一、技術能力（25分）Technical Capability & Problem-Solving (25 Points)</b></p>
+<div class="form-group">
+  <label class="col-md-3 control-label" style="width: 20%;text-align: left !important;text-indent: 1em;font-weight: normal;">加工/材料專業理解
+Understanding of machining/material characteristics</label> 
+    <div class="col-md-6 inputGroupContainer">
+    <div class="input-group">
+  <input name="department" id="department" placeholder="Department" class="form-control"  type="radio" style="border-radius: 4px;width: 400px;">
+    </div>
+  </div>
+</div>    
 <!-- Text input-->
 
 <!-- Success message -->
