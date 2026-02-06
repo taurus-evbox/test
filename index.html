@@ -169,7 +169,7 @@
           complete: function () {
             //完成後把這些欄位清空
             $('#company_name').val('')
-            $('#item1').val('')
+            $('input[name="item1"]').prop('checked', false); // 清空單選鈕
             //最後跳轉到感謝的頁面
             window.location.replace("thank.html");
           }
