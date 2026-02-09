@@ -161,6 +161,10 @@ $('#google-form').submit(function (e) {
       crossDomain: true,
       data: {
         "entry.1888997779": $('#company_name').val(),
+        "entry.1285394969": $('#department').val(),
+        "entry.703989245": $('#position').val(),
+        "entry.425274086": $('#name').val(), 
+        "entry.1004424836": $('#email').val(),         
         "entry.1781783572": $('input[name="item1"]:checked').val()
       },
       type: "POST",
@@ -185,6 +189,10 @@ $('#google-form').submit(function (e) {
 
 function handleSuccess() {
   $('#company_name').val('');
+  $('#department').val('');
+  $('#position').val('');
+  $('#name').val('');
+  $('#email').val('');
   $('input[name="item1"]').prop('checked', false);
   // alert("感謝您的填寫！");
   window.location.replace("thank.html");
